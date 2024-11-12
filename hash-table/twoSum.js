@@ -13,3 +13,16 @@ function twoSum(array, target){
  }
   return []
 }
+function optTwoSum(array, target){
+  const map = new Map();
+  for(let i = 0; i < array.length; i++){
+    const index = target - array[i];
+    if(map.has(array[i])){
+      return [i, map.get(array[i])]
+    }
+    else{
+      map.set(index, i)
+    }
+  }
+  return []
+}
