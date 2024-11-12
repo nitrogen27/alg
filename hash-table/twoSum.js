@@ -6,7 +6,7 @@ function twoSum(array, target){
  }
  let j = 0;
  while(j !== array.length){
-   if(map.has(array[j])){
+   if(map.has(array[j]) && j !== map.get(array[j])){
      return [j,map.get(array[j])]
    }
    j++;
