@@ -12,6 +12,15 @@ function findPairsThatSumToTarget(nums, target) {
 
     return pairs;
 }
+
+// Пример использования:
+const numbers = [2, 3, 5, 7, 5];
+const targetSum = 10;
+const pairs = findPairsThatSumToTarget(numbers, targetSum);
+
+console.log("Пары чисел, сумма которых равна", targetSum, ":");
+pairs.forEach(pair => console.log(pair));
+
 function getAllUniqueTwoNumberCombinations(numbers) {
     const combinations = [];
     const seen = new Set();
@@ -27,6 +36,20 @@ function getAllUniqueTwoNumberCombinations(numbers) {
     }
     return combinations;
 }
+
+// Пример использования:
+const numbers = [1, 2, 2, 3];
+const result = getAllUniqueTwoNumberCombinations(numbers);
+console.log(result);
+
+// Вывод:
+// [
+//   [1, 2],
+//   [1, 3],
+//   [2, 2],
+//   [2, 3]
+// ]
+
 
 function getAllTwoNumberCombinationsUniqueNumbers(numbers) {
     const uniqueNumbers = [...new Set(numbers)];
@@ -51,26 +74,4 @@ console.log(result);
 //   [2, 3]
 // ]
 
-
-// Пример использования:
-const numbers = [1, 2, 2, 3];
-const result = getAllUniqueTwoNumberCombinations(numbers);
-console.log(result);
-
-// Вывод:
-// [
-//   [1, 2],
-//   [1, 3],
-//   [2, 2],
-//   [2, 3]
-// ]
-
-
-// Пример использования:
-const numbers = [2, 3, 5, 7, 5];
-const targetSum = 10;
-const pairs = findPairsThatSumToTarget(numbers, targetSum);
-
-console.log("Пары чисел, сумма которых равна", targetSum, ":");
-pairs.forEach(pair => console.log(pair));
 
