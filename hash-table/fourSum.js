@@ -53,6 +53,46 @@ function fourSum(nums, target) {
   }
   return fours;
 }
+function findNsum(nums, l, r, target, numElements, result, results) {
+    // early termination
+    const notEnoughElementsToFormSum = r - l + 1 < numElements;
+    const sumOfOneElement = numElements < 2;
+    const targetrSmallerThanMinPossibleSum = target < nums[l] * numElements;
+    const targetLargerThanMaxPossibleSum = target > nums[r] * numElements;
+    if (notEnoughElementsToFormSum || sumOfOneElement || targetrSmallerThanMinPossibleSum || targetLargerThanMaxPossibleSum) {  
+        return;
+    }
+    if (numElements === 2) { // two pointers solve sorted 2-sum problem
+        while (l < r) {
+            const s = nums[l] + nums[r];
+            if (s === target) {
+                results.push([...result, nums[l], nums[r]]);
+                l++;
+                while (l < r && nums[l] === nums[l - 1]) {
+                    l++;
+                }
+            } else if (s < target) {
+                l++;
+            } else {
+                r--;
+            }
+        }
+    } else { // recursively reduce N
+        for (let i = l; i <= r; i++) {
+            if (i === l || (i > l && nums[i - 1] !== nums[i])) {
+                findNsum(nums, i + 1, r, target - nums[i], numElements - 1, [...result, nums[i]], results);
+            }
+        }
+    }
+}
+
+function fourSum(nums, target) {
+    nums.sort((a, b) => a - b);
+    const results = [];
+    const numberOfArrayElements = 4;
+    findNsum(nums, 0, nums.length - 1, target, numberOfArrayElements, [], results);
+    return results;
+}
 function fourSum(nums, target) {
     const quadruplets = [];
     if (nums.length < 4) return quadruplets;
