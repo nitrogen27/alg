@@ -74,16 +74,18 @@ export function opt2ThreeSum(nums) {
       let target = nums[i] + nums[left] + nums[right];
       if (target === 0) {
         result.push([nums[i], nums[left], nums[right]]);
-        left++
-        right--
-      }
-      if (target < 0) {
         left++;
-      } else {
         right--;
+        while (left > i + 1 && nums[left] === nums[left - 1]) left++;
+        while (right < nums.length - 1 && nums[right] === nums[right + 1])
+          right--;
+      } else {
+        if (target < 0) {
+          left++;
+        } else {
+          right--;
+        }
       }
-      while(left > i + 1 && nums[left] === nums[left-1]) left++
-      while(right < nums.length - 1 && nums[right] === nums[right+1]) right--
     }
   }
   console.log(result);
