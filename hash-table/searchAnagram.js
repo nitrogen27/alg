@@ -41,6 +41,19 @@ export function searchAnagram(str, target) {
   console.log(result);
   return result;
 }
+/*
+flatPrepare [ 0, 1, 2, 3, 4 ]
+hashStr [ [ 'a', [ 0, 1, 3 ] ], [ 'b', [ 2, 4 ] ] ]
+link [
+  [ 0, [ 0 ] ],
+  [ 1, [ 0 ] ],
+  [ 3, [ 0 ] ],
+  [ 2, [ 1 ] ],
+  [ 4, [ 1 ] ]
+]
+[ [ 1, 2 ], [ 2, 3 ], [ 3, 4 ] ]
+  expect(searchAnagram("aabab", "ab")).exist;
+*/
 export function searchAnagram(str, target) {
   const hashStr = new Map();
   const link = new Map();
