@@ -114,6 +114,10 @@ export function searchAnagram(str, target) {
   const sizeTarget = target.length;
   const result = [];
 
+    if (str === target) {
+    return [0];
+  }
+
   for (let i = 0; i < str.length; i++) {
     if (hashStr.has(str[i])) {
       hashStr.set(str[i], [...hashStr.get(str[i]), i]);
