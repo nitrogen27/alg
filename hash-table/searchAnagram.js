@@ -41,6 +41,7 @@ export function searchAnagram(str, target) {
   console.log(result);
   return result;
 }
+
 /*
 flatPrepare [ 0, 1, 2, 3, 4 ]
 hashStr [ [ 'a', [ 0, 1, 3 ] ], [ 'b', [ 2, 4 ] ] ]
@@ -215,6 +216,8 @@ const findAnagrams = (s, p) => {
     }
     return output;
 };
+s = "cbaebabacd"
+p = "abc"
 export function findAnagrams(s, p) {
   const output = [];
 
