@@ -218,6 +218,7 @@ const findAnagrams = (s, p) => {
 };
 s = "cbaebabacd"
 p = "abc"
+[0,6]
 export function findAnagrams(s, p) {
   const output = [];
 
