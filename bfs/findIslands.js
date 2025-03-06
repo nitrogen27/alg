@@ -4,9 +4,9 @@
  [0,1,0]
  [1,1,0]]
 
-[["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]
 
- 
+ [["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]
+
  */
 
 export function findIsland(grid) {
@@ -45,7 +45,7 @@ export function findIsland(grid) {
             neighbour[1] >= 0
           ) {
             const node = `${neighbour[0]}${neighbour[1]}`;
-            if (grid[neighbour[0]][neighbour[1]] === 1) {
+            if (Number(grid[neighbour[0]][neighbour[1]]) === 1) {
               stack.push(node);
             }
           }
@@ -55,7 +55,7 @@ export function findIsland(grid) {
   }
   for (let i = 0; i < rowSize + 1; i++) {
     for (let j = 0; j < columnSize + 1; j++) {
-      if (grid[i][j] === 1) {
+      if (Number(grid[i][j]) === 1) {
         bfs(i, j);
       }
     }
