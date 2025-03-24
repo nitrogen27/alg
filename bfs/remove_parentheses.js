@@ -48,7 +48,60 @@ export function remove_parentheses(s) {
   console.log(result);
   return result;
 }
+export function remove_parentheses(s) {
+  function validate(s) {
+    const stack = [];
+    for(let symbol of s){
+      if(symbol === "("){
+        stack.push(symbol);
+      }
+      if(symbol === ")" && stack.pop() !== "("){
+        return false
+      }
+    }
+    return stack.length === 0;
+  }
+  if (!s || s.length === 0) return [''];
+  const stack = [s];
+  const visited = new Set();
+  let result = [];
+  let isValid = false;
+  while (stack.length > 0) {
+    const newStr = stack.shift();
+    if (validate(newStr)) {
+      isValid = true;
+      result.push(newStr);
+    }
+    if (!isValid) {
+      for (let i = 0; i < newStr.length; i++) {
+        if (newStr[i] !== "(" && newStr[i] !== ")") continue;
+        const next = newStr.substring(0, i) + newStr.substring(i + 1);
+        if (!visited.has(next)) {
+          visited.add(next);
+          stack.push(next);
+        }
+      }
+    }
+  }
+  console.log(result);
+  return result;
+}
+/**
+ * @param {string} s
+ * @return {string[]}
+ */
+var isValid = string => {
+  let open = 0;
+  for (const c of string) {
+    if (c === '(') open++;// Increment open brackets
+    else if (c === ')') {
+      if (open === 0) return false;// If closing bracket, but no open bracket, this is invalid
+      open--;
+    }
+  }
 
+  return open === 0;// Open brackets should be zero for valid string
+};
 /**
  * @param {string} s
  * @return {string[]}
