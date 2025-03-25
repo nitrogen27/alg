@@ -33,3 +33,28 @@ export function interval(a) {
   console.log(merged)
   return merged
 }
+/*
+[1,4],[2,5], [7,10],[10,15],[18,20]
+[1,5],[7,15],[18,20]
+
+[1,5][2,3]
+
+
+ */
+export function interval(a) {
+  const sortedIntervals = a.sort((a, b) => a[0] - b[0]);
+  const merged = [sortedIntervals.shift()];
+
+  for (let interval of sortedIntervals) {
+    if (merged[merged.length - 1][1] >= interval[0]) {
+      if (merged[merged.length - 1][1] < interval[0]) {
+        const end = merged.pop();
+        merged.push([end[0], interval[1]]);
+      }
+    } else {
+      merged.push(interval);
+    }
+  }
+  console.log(merged);
+  return merged;
+}
