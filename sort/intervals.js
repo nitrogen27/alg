@@ -23,7 +23,7 @@ export function interval(a) {
   const merged = [sortedIntervals.shift()];
 
   for (let interval of sortedIntervals) {
-    if (merged[merged.length - 1][1] >= interval[0]) {
+    if (merged[merged.length - 1][1] >= interval[1]) {
       const end = merged.pop();
       merged.push([end[0], interval[1]]);
     } else {
