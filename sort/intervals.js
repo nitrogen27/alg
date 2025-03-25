@@ -18,3 +18,18 @@ var merge = function (intervals) {
     }
     return merged;
 };
+export function interval(a) {
+  const sortedIntervals = a.sort((a, b) => a[0] - b[0]);
+  const merged = [sortedIntervals.shift()];
+
+  for (let interval of sortedIntervals) {
+    if (merged[merged.length - 1][1] >= interval[0]) {
+      const end = merged.pop();
+      merged.push([end[0], interval[1]]);
+    } else {
+      merged.push(interval);
+    }
+  }
+  console.log(merged)
+  return merged
+}
