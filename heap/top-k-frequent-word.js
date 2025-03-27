@@ -16,3 +16,21 @@ var topKFrequent = function(words, k) {
     );
     return result.slice(0, k);
 };
+export function words(ws, k) {
+  const fr = new Map();
+  for (let w of ws) {
+    fr.set(w, fr.has(w) ? fr.get(w) + 1 : 1);
+  }
+  const sortedWordsByFr = Array.from(fr).sort((a, b) => {
+    if (a[1] !== b[1]) {
+      return b[1] - a[1];
+    }
+    return a[0].localeCompare(b[0]);
+  });
+
+  const result = sortedWordsByFr.slice(0, k).map((r) => r[0]);
+
+  console.log(result);
+
+  return result;
+}
