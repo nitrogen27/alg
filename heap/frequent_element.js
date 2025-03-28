@@ -36,7 +36,7 @@ export function frequent_elements(nums, k) {
     if (result.length < k) {
       const value = heap.pop();
       if(value){
-        result.push(...result,...value);
+        result.push(...value);
       }
 
     } else {
