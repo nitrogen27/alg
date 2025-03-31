@@ -35,3 +35,27 @@ export function partition(s) {
   console.log(partition);
   return partition;
 }
+/**
+ * @param {string} s
+ * @return {number[]}
+ */
+const toInt = (char)=> char.charCodeAt(0) - 'a'.charCodeAt(0);
+var partitionLabels = function(s) {
+    const last = new Array(26).fill(-1);
+    for(let i = 0; i < s.length; i++){
+        const char = s[i], order = toInt(char);
+        last[order] = i;
+    }
+    let result = [], size = 0, max = 0;
+    for(let i = 0; i < s.length; i++){
+        size++
+        const char = s[i], order = toInt(char);
+        max = Math.max(max, last[order])
+        if(max > i)
+            continue;
+        max = 0
+        result.push(size)
+        size = 0
+    }
+    return result;
+};
