@@ -801,3 +801,86 @@ Quickselect простыми словами — это метод, чтобы б
 • Quickselect «не докручивает» полный QuickSort: мы не сортируем обе стороны массива до конца, а только ту часть, где точно лежит нужный элемент. За счёт этого не тратится время на упорядочивание лишних элементов.  
 
 Время работы: в среднем алгоритм работает за O(n), но в худшем случае может быть O(n^2), если опорные элементы выбираются совсем неудачно. 
+ Для эффективного нахождения медианы из массива в JavaScript можно использовать два подхода. Вот реализация базового метода с сортировкой (простой и понятный) и оптимизированного с использованием Quickselect (быстрее для больших данных).
+
+---
+
+### 1. Базовый метод (с сортировкой)
+function findMedianBasic(arr) {
+    if (arr.length === 0) return null;
+    
+    // Создаем копию и сортируем
+    const sorted = [...arr].sort((a, b) => a - b);
+    const mid = Math.floor(sorted.length / 2);
+    
+    // Для четного и нечетного количества элементов
+    return sorted.length % 2 === 0 
+        ? (sorted[mid - 1] + sorted[mid]) / 2 
+        : sorted[mid];
+}
+
+Особенности:
+- Простота реализации.
+- Сложность: O(n log n) из-за сортировки.
+- Подходит для небольших массивов.
+
+---
+
+### 2. Оптимизированный метод (Quickselect)
+function findMedianOptimized(arr) {
+    if (arr.length === 0) return null;
+
+    const findKth = (k, left, right) => {
+        while (true) {
+            if (left === right) return arr[left];
+            
+            // Выбор опорного элемента и разделение массива
+            let pivotIdx = partition(left, right);
+            
+            if (k === pivotIdx) return arr[k];
+            else if (k < pivotIdx) right = pivotIdx - 1;
+            else left = pivotIdx + 1;
+        }
+    };
+
+    const partition = (left, right) => {
+        const pivot = arr[right];
+        let i = left;
+        for (let j = left; j < right; j++) {
+            if (arr[j] < pivot) {
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+                i++;
+            }
+        }
+        [arr[i], arr[right]] = [arr[right], arr[i]];
+        return i;
+    };
+
+    const n = arr.length;
+    const mid = Math.floor(n / 2);
+    
+    // Для нечетного и четного количества элементов
+    if (n % 2 === 1) {
+        return findKth(mid, 0, n - 1);
+    } else {
+        const a = findKth(mid - 1, 0, n - 1);
+        const b = findKth(mid, 0, n - 1);
+        return (a + b) / 2;
+    }
+}
+
+Особенности:
+- Использует алгоритм Quickselect для поиска k-го элемента без полной сортировки.
+- Средняя сложность: O(n), но в худшем случае O(n^2).
+- Подходит для больших массивов.
+
+---
+
+### Пример использования:
+const data = [5, 2, 9, 1, 5, 6];
+console.log(findMedianBasic(data)); // 5
+console.log(findMedianOptimized(data)); // 5
+
+### Как выбрать метод?
+- Используйте `findMedianBasic`, если нужна простота и массив небольшой.
+- Используйте `findMedianOptimized`, если данные очень большие и требуется оптимизация скорости (но учитывайте риск худшего случая).
