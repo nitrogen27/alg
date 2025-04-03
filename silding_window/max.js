@@ -83,3 +83,4 @@ export function max(nums, k) {
   }
   console.log(result);
   return result;
+}
