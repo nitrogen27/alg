@@ -16,6 +16,16 @@ Example 2:
 
 Input: nums = [1], k = 1
 Output: [1]
+nums =
+[1,-1]
+k =
+1
+
+Use Testcase
+Output
+[1,1]
+Expected
+[1,-1]
 export function max(nums, k) {
   const help = [];
   const result = [];
