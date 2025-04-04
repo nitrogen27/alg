@@ -45,3 +45,31 @@ export function replacement(s, k) {
   }
   return result;
 }
+export function replacement(s, k) {
+  let start = 0;
+  let end = 0;
+  const fr = new Array(26).fill(1);
+  let maxFr = 1;
+  let result = 1;
+
+  while (end < s.length) {
+    let indexStartChar = s.charCodeAt(start) - "A".charCodeAt(0);
+    let indexEndChar = s.charCodeAt(end) - "A".charCodeAt(0);
+    maxFr = Math.max(maxFr, fr[indexEndChar]);
+    const lengthStr = end - start + 1;
+    const need = lengthStr - maxFr;
+    if (need > k) {
+      fr[indexStartChar]--;
+      console.log(s.slice(start, end + 1), need,lengthStr, result);
+      start++;
+    }
+    if (need <= k) {
+      fr[indexEndChar]++;
+      result = Math.max(result, lengthStr);
+      console.log(s.slice(start, end + 1), need,lengthStr, result);
+      end++;
+    }
+  }
+  console.log(result);
+  return result;
+}
