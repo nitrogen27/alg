@@ -67,7 +67,7 @@ var isSameTree = function(p, q) {
     if (p?.val !== q?.val) {
       return false;
     }
-    let left , right = false;
+    let left = false , right = false;
     if(p.left !== null && q.left !== null){
      left = isSame(p.left, q.left);
     }
