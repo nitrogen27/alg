@@ -27,7 +27,7 @@ export function sameTree(p, q) {
     if (p.val !== q.val) {
       return false;
     }
-    let left,
+    let left = false,
       right = false;
     if (p.left !== null && q.left !== null) {
       left = isSame(p.left, q.left);
