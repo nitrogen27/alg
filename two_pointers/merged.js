@@ -25,3 +25,32 @@ var merge = function (nums1, m, nums2, n) {
         }
     }
 };
+/*
+[1,3,5,0,0,0]
+[2,4,6]
+
+5 < 6  [1,3,5,0,0,6] [2,4]
+
+5 > 4  [1,3,5,0,5,6] [2,4]
+
+3 > 2  [1,3,3,4,5,6] [2]
+
+1 < 2  [1,2,3,4,5,6] []
+
+ */
+
+export function merged(nums1, m, nums2, n) {
+  let curNums1 = m - 1;
+  let curNums2 = n - 1;
+  while (curNums2) {
+    if (nums1[curNums1] > nums2[curNums2]) {
+      nums1[curNums1 + n] = nums1[curNums1];
+      curNums1--;
+    } else {
+      nums1[curNums1 + n] = nums2[curNums2];
+      curNums1--;
+      curNums2--;
+    }
+  }
+  return nums1
+}
