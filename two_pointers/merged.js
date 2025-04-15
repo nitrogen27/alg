@@ -54,3 +54,37 @@ export function merged(nums1, m, nums2, n) {
   }
   return nums1
 }
+export function merged(nums1, m, nums2, n) {
+  let curNums1 = m - 1;
+  let curNums2 = n - 1;
+  let curEnd = m + n - 1;
+  
+  while(curNums2){
+    if(nums1[curNums1] <= nums2[curNums2]){
+      nums1[curEnd] = nums2[curNums2];
+      curNums2--;
+    }
+    else{
+      nums2[curEnd] = nums1[curNums1];
+      curNums1--;
+    }
+    curEnd--;
+  }
+}
+export function merged(nums1, m, nums2, n) {
+  let curNums1 = m - 1;
+  let curNums2 = n - 1;
+  let curEnd = m + n - 1;
+  
+  while(curNums2){
+    if(nums1[curNums1] <= nums2[curNums2]){
+      nums1[curEnd] = nums2[curNums2];
+      curNums2--;
+    }
+    else{
+      nums2[curEnd] = nums1[curNums1];
+      curNums1--;
+    }
+    curEnd--;
+  }
+}
