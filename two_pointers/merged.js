@@ -88,3 +88,20 @@ export function merged(nums1, m, nums2, n) {
     curEnd--;
   }
 }
+export function merged(nums1, m, nums2, n) {
+  let curNums1 = m - 1;
+  let curNums2 = n - 1;
+  let curEnd = m + n - 1;
+  while (curNums2 + 1) {
+    if (curNums1 === -1 || nums1[curNums1] <= nums2[curNums2]) {
+      nums1[curEnd] = nums2[curNums2];
+      curNums2--;
+    } else {
+      nums1[curEnd] = nums1[curNums1];
+      curNums1--;
+    }
+    curEnd--;
+  }
+  console.log(nums1);
+  return nums1;
+}
