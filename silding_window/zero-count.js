@@ -9,7 +9,7 @@ export function counter(nums) {
       count++
     }
     if(count < 2){
-      result = Math.max(result, right - left + 1 - count)
+      result = Math.max(result, right - left)
       right++
     }
     if(count >= 2){
