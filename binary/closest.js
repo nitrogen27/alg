@@ -3,7 +3,7 @@ export function closest(nums, x, k) {
   let right = nums.length - 1;
 
   const result = [];
-  if (nums[left] <= x && x <= nums[right]) {
+  if (nums[left] < x && x < nums[right]) {
     while (left <= right) {
       const mid = Math.floor((left + right) / 2);
       if (nums[mid] === x) {
@@ -27,7 +27,7 @@ export function closest(nums, x, k) {
   }
 
   while (result.length < k) {
-    if (nums[left] <= x && x <= nums[right]) {
+    if (nums[left] < x && x < nums[right]) {
       if (Math.abs(x - nums[left]) <= Math.abs(x - nums[right])) {
         result.unshift(nums[left]);
         if (nums[left - 1]) {
@@ -43,13 +43,17 @@ export function closest(nums, x, k) {
       if (x < nums[0]) {
         result.push(nums[right]);
         right++;
-      } else {
+      }
+      else if(x === nums[0]){
+        result.push(nums[left]);
+        left++;
+      }
+      else {
         result.unshift(nums[right]);
         right--;
       }
     }
   }
-  console.log(left, right);
   console.log(result);
   return result;
 }
