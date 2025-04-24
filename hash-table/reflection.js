@@ -35,3 +35,39 @@ export function isReflection(points) {
   }
   return true;
 }
+/*
+
+1       |   5  7
+ 2      |  4
+   5    |      7
+
+  axis = (maxX + minX)/2
+ */
+
+export function isReflection(points) {
+  const hash = new Map();
+  let minX = Infinity,
+    maxX = -Infinity;
+  for (let point of points) {
+    const [x, y] = point;
+    minX = Math.min(minX, x);
+    maxX = Math.max(maxX, x);
+    if (hash.has(x)) {
+      hash.set(x, hash.get(x).add(y));
+    } else {
+      hash.set(x, new Set().add(y));
+    }
+  }
+  let axis = (maxX + minX) / 2;
+  for (let point of points) {
+    const [x, y] = point;
+    let pairX = x === axis ? x : 2 * axis - x;
+    if (!hash.has(pairX)) {
+      return false;
+    }
+    if (!hash.get(pairX).has(y)) {
+      return false;
+    }
+  }
+  return true;
+}
