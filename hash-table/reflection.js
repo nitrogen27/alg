@@ -24,7 +24,10 @@ export function isReflection(points) {
       hash.set(x, [y]);
     }
   }
-  const axis = (minX - maxX) / 2;
+  let axis =  (maxX - minX)/2
+  if(minX < 0 && maxX > 0 && maxX <= Math.abs(minX)){
+    axis = -(maxX - Math.abs(minX))/2
+  }
 
   for (let point of points) {
     const [x, y] = point;
@@ -32,7 +35,7 @@ export function isReflection(points) {
     if (x === axis) {
       pairX = axis;
     } else {
-      pairX = x > axis ? 2 * axis + x : x - 2 * axis;
+      pairX = x > axis ? x - 2 * axis : 2 * axis + x;
     }
     if (!hash.has(pairX)) {
       return false;
