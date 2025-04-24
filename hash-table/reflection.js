@@ -1,3 +1,12 @@
+/*
+
+1       |   5  7
+ 2      |  4
+   5    |      7
+
+  axis = (maxX + minX)/2
+ */
+
 export function isReflection(points) {
   const hash = new Map();
   let minX = Infinity,
@@ -13,19 +22,10 @@ export function isReflection(points) {
       hash.set(x, [y]);
     }
   }
-  let axis = (maxX - minX) / 2;
-  if (minX < 0 && maxX > 0 && maxX <= Math.abs(minX)) {
-    axis = -(maxX - Math.abs(minX)) / 2;
-    pMin = -1;
-  }
+  let axis = (maxX + minX) / 2;
   for (let point of points) {
     const [x, y] = point;
-    let pairX;
-    if (x === axis) {
-      pairX = axis;
-    } else {
-      pairX = x > axis ? (x - 2 * axis) * pMin : 2 * axis + x;
-    }
+    let pairX = x === axis ? x : 2 * axis - x;
     if (!hash.has(pairX)) {
       return false;
     }
