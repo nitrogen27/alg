@@ -12,8 +12,8 @@
 
 export function isReflection(points) {
   const hash = new Map();
-  let minX = -Infinity,
-    maxX = Infinity;
+  let minX = Infinity,
+    maxX = -Infinity;
   for (let point of points) {
     const [x, y] = point;
     minX = Math.min(minX, x);
@@ -24,7 +24,8 @@ export function isReflection(points) {
       hash.set(x, [y]);
     }
   }
-  const axis = (maxX - minX) / 2;
+  const axis = (minX - maxX) / 2;
+
   for (let point of points) {
     const [x, y] = point;
     let pairX;
