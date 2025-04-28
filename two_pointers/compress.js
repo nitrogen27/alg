@@ -58,3 +58,40 @@ export function compress(chars) {
   console.log(result);
   return result;
 }
+/*
+
+["C","A","A","A","B] ["C","A","3","B","B"]
+
+1 right + 1 !== right === "A" left = 0; right = 0 count = 0
+2 right + 1 === right === "A" left = 1; right = 1 count = 0
+3 right + 1 === right === "A" left = 1; right = 2 count = 1
+4 right + 1 !== right !== "B" left = 1; right = 3 count = 2
+5 right + 1 !== right !== undefined left = 2; right = 4 count = 0
+
+left 3 right 4
+
+ */
+
+export function compress_in_place(chars) {
+  let left = 0;
+  let right = 0;
+  let count = 0;
+
+  while (right < chars.length) {
+    right++;
+    if (right === right + 1) {
+      count++;
+    } else {
+      left++;
+      if (count > 1) {
+        for (let number of (count + 1).toString()) {
+          chars[left] = number;
+          left++;
+        }
+      }
+      count = 0;
+    }
+  }
+  console.log(chars.slice(0, left));
+  return chars.slice(0, left);
+}
