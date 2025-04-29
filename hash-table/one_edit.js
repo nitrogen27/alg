@@ -30,7 +30,10 @@
 
 1. A A 1
 2 B B 0
-
+s =
+"teacher"
+t =
+"detacher"
  */
 
 export function one_edit(s, t) {
