@@ -134,7 +134,7 @@ var compress = function(chars) {
 5 right + 1 === right !=== empty left = 3; right = 4 count = 1
 
 left 3 right 4
-
+["a","b","c","d","e","f","g","g","g","g","g","g","g","g","g","g","g","g","a","b","c"]
  */
 
 export function compress_in_place(chars) {
