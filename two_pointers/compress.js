@@ -136,6 +136,20 @@ var compress = function(chars) {
 left 3 right 4
 ["a","b","c","d","e","f","g","g","g","g","g","g","g","g","g","g","g","g","a","b","c"]
  */
+/*
+
+["C","A","A","A","B","B"] ["C","A","3","B","B"]
+
+1 right + 1 !== right === "A" left = 0; right = 0 count = 0
+2 right + 1 === right === "A" left = 1; right = 1 count = 0
+3 right + 1 === right === "A" left = 1; right = 2 count = 1
+4 right + 1 !== right !== "B" left = 3; right = 3 count = 2  ["C", "A","3","B","B","B"]
+5 right + 1 === right === "B" left = 3; right = 4 count = 0
+5 right + 1 === right !=== empty left = 3; right = 4 count = 1
+
+left 3 right 4
+
+ */
 
 export function compress_in_place(chars) {
   let left = 0;
@@ -151,14 +165,15 @@ export function compress_in_place(chars) {
         for (let number of (count + 1).toString()) {
           chars[left] = number;
           left++;
-          chars[left] = chars[right + 1];
         }
       }
       count = 0;
     }
     right++;
+    chars[left] = chars[right];
   }
   chars.length = left;
   console.log(chars, left);
   return left;
 }
+
