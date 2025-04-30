@@ -1,158 +1,106 @@
 /*
-"ABC" "ABMC" true  add
+  s      t
+[A,C] [A,B,C] insert
+[A,B] [A,B,C]
+[A,B] [C,A,B]
 
-"ABC" "ABBC" true  add
+[A,B,C] [A,C] delete
+[A,B,C] [A,B]
+[C,A,B] [A,B]
 
-"ABC"  "AB" true   delete
-
-"ABC"  "ABM" true  change
-
-"" "" false
-
-"" "A" true
-
-"A" "" true
-
-"ABC" "ABC" false
-
-"ABC" "MVC" false
-
-"ABC" "ABBB" false
-
-"ABC" "MV" false
-
-"ABC" "MA" false
-
-"ABBC" "ABC" true  add
+[A,M,B] [A,B,C] update
 
 
-"ABC" "AB"
+[A,C] [A,B,C] insert
 
-1. A A 1
-2 B B 0
-s =
-"teacher"
-t =
-"detacher"
+0 A === A left = 0 right = 0
+1 C !== B left 1 right 1 count 1
+
+C === C left =1 right = 2
+
+[A,C] [A,B,C]
+
+0 A === A left = 0 right = 0
+1 C !== B left 1 right 1 count 1
+
+[A,C] [A,C,B]
+
+0 A === A left = 0 right = 0
+1 C === C left 1 right 1
+
+[A,C] [A,B,A]
+
+0 A === A left = 0 right = 0
+1 C !== B left 1 right 1 count 1
+
+C !== A left = 1  right = 2 count =2
+
+
+[A,B,C] [A,C]  insert
+
+0 A === A left = 0 right = 0
+1 B !== C left 1 right 1 count 1
+3 C === C left = 2 right = 1
+
+[C,A,B] [A,B]
+
+0 C !== A left = 0 right = 0 count 1
+1 A === A left 1 right 0
+3 B === B left = 2 right = 1
+
+
+[A,B,C]  [A,B,M,A]
+
+0 A === A left = 0 right = 0
+1 B === B left 1 right 1
+3 C !== M left = 2 right = 2 count = 1
+
+C !== A left = 2 right = 3
+
+teacher detacher
+
+0 t === d left = 0 right = 0 count = 1
+1 t !== e left 0 right 1 count = 2
+
  */
 
 export function one_edit(s, t) {
-  let sCount = s.length;
-  let tCount = t.length;
-
-  if (Math.abs(t.length - s.length) > 1) {
-   return false;
+  if (Math.abs(s.length - t.length) > 1) {
+    return false;
   }
-
-  const fr = new Map();
-
-  for (let char of t) {
-    if (fr.has(char)) {
-      fr.set(char, fr.get(char) + 1);
-    } else {
-      fr.set(char, 1);
-    }
-  }
-  for (let char of s) {
-    if (fr.has(char) && fr.get(char) !== 0) {
-      fr.set(char, fr.get(char) - 1);
-      tCount--;
-    }
-  }
-  if (t.length - sCount === 1 && tCount === 1) {
-    return true;
-  }
-  if (sCount - t.length === 1 && tCount === 0) {
-    return true;
-  }
-  return sCount - t.length === 0 && tCount === 1;
-}
-/*
-"ABC" "ABMC" true  add
-
-"ABC" "ABBC" true  add
-
-"ABC"  "AB" true   delete
-
-"ABC"  "ABM" true  change
-
-"ABC" "ABMC
-
-left right
-
-1. A === A left = 0 right = 0
-2. B === B left = 1 right = 1
-3. C !== M left = 2 right = 2 count = 1
-
-3. C !== M left = 2 right = 2 count = 1
-
-
-
-"ABMC" "ABC"
-
-1. A === A left = 0 right = 0
-2. B === B left = 1 right = 1
-3. M !== C left = 2 right = 2 count = 1
-4. C === C left = 3 right = 2
-
-"ABC"  "ABM"
-
-1. A === A left = 0 right = 0
-2. B === B left = 1 right = 1
-3. M !== C left = 3 right = 3 count = 1
-
-"ABCD" "DCB"
-1. A !== D left = 0 right = 0 count = 1
-2. B !== C left = 1 right = 1 count = 2
-
-"MABC"   "ABC"
-
-1. M !== A left = 0 right = 0 count = 1
-2. A === A left = 1 right = 0
-3. B === B left = 2 right = 1
-4. C === B left = 3 right = 2
-
-
-"AB"   "AB"
-
-1. A === A left = 0 right = 0 count = 1
-2. A === A left = 1 right = 0
-3. B === B left = 2 right = 1
-4. C === B left = 3 right = 2
-
-"AB"   "ABC"
-
-1. A === A left = 0 right = 0
-2. B === B left = 1 right = 1
-
-"ABC"   "ABM"
-
-1. A === A left = 0 right = 0
-2. B === B left = 1 right = 1
-2. C !== M left = 2 right = 2 count = 1
-
-right не двигаем если нет совпадения
- */
-
-export function one_edit(s, t) {
-  let left = 0;
-  let right = 0;
-  let count = 0;
+  let left = 0,
+    right = 0,
+    count = 0;
 
   while (left < s.length) {
     if (s[left] !== t[right]) {
       count++;
+      if(count > 1){
+        return false;
+      }
+      if (s.length < t.length) {
+        right++;
+        if(left + 1 === s.length){
+          break
+        }
+      }
+      if (s.length > t.length) {
+        left++;
+        if(right + 1 === t.length){
+          break
+        }
+      }
+      if (s.length === t.length) {
+        left++;
+        right++;
+      }
     } else {
+      left++;
       right++;
     }
-    left++;
-    if (count > 1) {
-      return false;
-    }
   }
-  if (t.length > s.length && t[right]) {
-   count++;
+  if (s.length < t.length && s[left] !== t[right]) {
+    count++;
   }
-  console.log(left, right, count)
   return count === 1;
 }
