@@ -62,6 +62,11 @@ teacher detacher
 0 t === d left = 0 right = 0 count = 1
 1 t !== e left 0 right 1 count = 2
 
+teacher teachy
+
+5 e !== y left = 5 right = 5 count = 1
+6 r !== y left = 6 right = 5 count = 2
+
  */
 
 export function one_edit(s, t) {
@@ -86,9 +91,6 @@ export function one_edit(s, t) {
       }
       if (s.length > t.length) {
         left++;
-        if(right + 1 === t.length){
-          break
-        }
       }
       if (s.length === t.length) {
         left++;
