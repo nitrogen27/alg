@@ -16,7 +16,14 @@ right < 4
 3. [1,20] [25,30] left =0; right = 3 rooms = 3
 4. [25,30] [26,29] left =3; right = 4 rooms = 4
 
-[[0,30],[5,10],[15,20]]
+
+[0,30],[5,10],[15,20],[35,40]
+
+1 [0,30] [5,10]  left = 0; right = 1 rooms = 2
+2 [5,10] [15,20]  left = 1; right = 2 rooms = 2
+3 [15,20] [35,40]  left = 1; right = 2 rooms = 2
+
+
 4       10
  5  8
 
@@ -37,9 +44,7 @@ export function getMinMeetingRooms(intervals) {
     ) {
       rooms++
     }
-    else{
-      left = right;
-    }
+    left++;
     right++;
   }
   console.log(rooms);
