@@ -33,6 +33,8 @@ left [1, 13] right [13,15]
 
 [[0,30],[5,10],[15,20]]
 
+[[5,8],[6,8]]
+
  */
 
 export function getMinMeetingRooms(intervals) {
