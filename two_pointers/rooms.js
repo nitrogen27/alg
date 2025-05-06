@@ -1,54 +1,64 @@
 /*
-[[1,20],[26,29][5,9],[4,5],[25,30]]
+
+[[9,10],[4,9],[4,17]]
+
+[[4,9],[4,17],[9,10]]
+
+1. 4 < 9 min [9, 17] room = 1
+2  9 < 17  min [10, 17] room =2
 
 
-1,4,5,25
-
-[[1,20],[4,5],[5,9],[25,30],[26,29]] 4 - rooms
-
-
-left = 0 right = 0
-
-right < 4
-
-1. [1,20] [4,5] left = 0; right = 1 rooms = 2
-2. [1,20] [5,9] left = 0; right = 2 rooms = 3
-3. [1,20] [25,30] left =0; right = 3 rooms = 3
-4. [25,30] [26,29] left =3; right = 4 rooms = 4
-
-
-[0,30],[5,10],[15,20],[35,40]
-
-1 [0,30] [5,10]  left = 0; right = 1 rooms = 2
-2 [5,10] [15,20]  left = 1; right = 2 rooms = 2
-3 [15,20] [35,40]  left = 1; right = 2 rooms = 2
+1. 4 < 9 room = 1
+2. 9 < 10 room = 2
 
 [[13,15],[1,13]]
-[[9,10],[4,9],[4,17]]
+
+[[1,13],[13,15]]
+
+left [1, 13] right [13,15]
+
+
+
+1. 13 < 13 min [13,15] room = 2
+
+
+
 [[2,11],[6,16],[11,16]]
-4       10
- 5  8
+
+[[2,11],[6,16],[11,16]]
+
+1. 6 < 11 min [11, 16] room 2
+2. 11 < 11 min [11,16]
+
+
+[[0,30],[5,10],[15,20]]
 
  */
 
 export function getMinMeetingRooms(intervals) {
+  let rooms = 0;
 
-  let rooms = 1;
-  let left = 0;
-  let right = 1;
+  const sortedIntervals = intervals.sort((a, b) => a[1] - b[1]);
+  const ends = new Set();
+  let start = 0;
+  let end = 1;
 
-  const sortedIntervals = intervals.sort((a, b) => a[0] - b[0]);
+  ends.add(sortedIntervals[start][1]);
 
-  while (right < sortedIntervals.length) {
-    if (
-      Math.max(sortedIntervals[left][0], sortedIntervals[right][0]) <=
-      Math.min(sortedIntervals[left][1], sortedIntervals[right][1])
-    ) {
-      rooms++
+  while (end < sortedIntervals.length) {
+    ends.add(sortedIntervals[end][1]);
+    const startValue = sortedIntervals[start][0];
+    let min = Math.min(...ends);
+    if(startValue >= min){
+      ends.delete(min);
+      min = Math.min(...ends);
     }
-    left++;
-    right++;
+    if (startValue < min) {
+      rooms++;
+    }
+    start++;
+    end++;
   }
   console.log(rooms);
-  return rooms;
+  return rooms || 1;
 }
