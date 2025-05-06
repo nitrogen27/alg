@@ -40,12 +40,10 @@ left [1, 13] right [13,15]
 export function getMinMeetingRooms(intervals) {
   let rooms = 0;
 
-  const sortedIntervals = intervals.sort((a, b) => a[1] - b[1]);
+  const sortedIntervals = intervals.sort((a, b) => a[0] - b[0]);
   const ends = new Set();
   let start = 0;
-  let end = 1;
-
-  ends.add(sortedIntervals[start][1]);
+  let end = 0;
 
   while (end < sortedIntervals.length) {
     ends.add(sortedIntervals[end][1]);
@@ -54,6 +52,7 @@ export function getMinMeetingRooms(intervals) {
     if(startValue >= min){
       ends.delete(min);
       min = Math.min(...ends);
+      rooms--;
     }
     if (startValue < min) {
       rooms++;
@@ -62,5 +61,5 @@ export function getMinMeetingRooms(intervals) {
     end++;
   }
   console.log(rooms);
-  return rooms || 1;
+  return rooms;
 }
