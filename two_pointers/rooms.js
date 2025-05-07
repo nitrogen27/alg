@@ -47,28 +47,24 @@ left [1, 13] right [13,15]
  */
 
 export function getMinMeetingRooms(intervals) {
-  let rooms = 0;
+   let rooms = 0;
+    const sortedIntervals = intervals.sort((a, b) => a[0] - b[0]);
+    const ends = [];
+    let start = 0;
+    let end = 0;
 
-  const sortedIntervals = intervals.sort((a, b) => a[0] - b[0]);
-  const ends = new Set();
-  let start = 0;
-  let end = 0;
-
-  while (end < sortedIntervals.length) {
-    ends.add(sortedIntervals[end][1]);
-    const startValue = sortedIntervals[start][0];
-    let min = Math.min(...ends);
-    if(startValue >= min){
-      ends.delete(min);
-      min = Math.min(...ends);
-      rooms--;
+    while (end < sortedIntervals.length) {
+        ends.push(sortedIntervals[end][1]);
+        const startValue = sortedIntervals[start][0];
+        let min = Math.min(...ends);
+        if (startValue >= min) {
+            ends.splice(ends.indexOf(min), 1);
+        }
+        if (startValue < min) {
+            rooms++;
+        }
+        start++;
+        end++;
     }
-    if (startValue < min) {
-      rooms++;
-    }
-    start++;
-    end++;
-  }
-  console.log(rooms);
-  return rooms;
+    return rooms;
 }
