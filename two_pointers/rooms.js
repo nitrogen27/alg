@@ -68,3 +68,28 @@ export function getMinMeetingRooms(intervals) {
     }
     return rooms;
 }
+/**
+ * @param {number[][]} intervals
+ * @return {number}
+ */
+var minMeetingRooms = function(intervals) {
+    let start = intervals.map((interval) => interval[0]).sort((a,b) => a-b);
+    let end = intervals.map((interval) => interval[1]).sort((a,b) => a-b);
+
+    let meetingRooms = 0;
+    let count = 0;
+    let s = 0, e = 0;
+
+    while(s < intervals.length) {
+        if(start[s] < end[e]) {
+            s++;
+            count++;
+        }
+        else {
+            e++;
+            count--;
+        }
+        meetingRooms = Math.max(meetingRooms, count);
+    }
+    return meetingRooms;
+};
