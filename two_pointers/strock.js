@@ -48,3 +48,19 @@ export function stock(prices) {
   console.log(profit);
   return profit;
 }
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+   let min = Infinity;
+   let max = 0;
+   for(let i=0;i<prices.length;i++){
+      min = Math.min(min,prices[i]);
+      let profit = prices[i]-min;
+      if(profit>max){
+        max = profit;
+      }
+   }
+   return max;
+};
