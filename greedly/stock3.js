@@ -35,7 +35,7 @@ fee = 1
 1. 2 > 1 2 - 1 = 1
 
 1 - 1 = 0
-
+[4,5,2,4,3,3,1,2,5,4]
  */
 
 export function stock3(prices, fee) {
