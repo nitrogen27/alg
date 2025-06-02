@@ -79,3 +79,16 @@ var maxProfit = function(P, F) {
     }
     return buying
 };
+export function stock3(prices, fee) {
+  let acc = - prices[0]; // кошелек покупка первой акции
+  let profit = 0; // выгода
+  
+  for(let i = 1; i < prices.length; i++){
+    profit = Math.max(profit,acc + prices[i] - fee); // продажа (транзакция с комиссией)
+    acc = Math.max(acc, profit - prices[i]); // покупка
+  }
+  console.log(profit);
+
+  return profit;
+
+}
