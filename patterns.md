@@ -11,6 +11,7 @@
    - 239. Sliding Window Maximum: [https://leetcode.com/problems/sliding-window-maximum](https://leetcode.com/problems/sliding-window-maximum)   
 
 ### 🌳 3. BFS/DFS (Поиск в ширину/глубину)
+    https://leetcode.com/problems/find-duplicate-subtrees/description/
    - 102. Binary Tree Level Order Traversal: [https://leetcode.com/problems/binary-tree-level-order-traversal](https://leetcode.com/problems/binary-tree-level-order-traversal)  
    - 200. Number of Islands: [https://leetcode.com/problems/number-of-islands](https://leetcode.com/problems/number-of-islands)  
    - 994. Rotting Oranges: [https://leetcode.com/problems/rotting-oranges](https://leetcode.com/problems/rotting-oranges)  
