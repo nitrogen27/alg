@@ -87,4 +87,36 @@ export function validateWithMask(value, mask) {
 
   // Проверка полного соответствия длины
   return valueIndex === value.length;
-}
+}<template>
+  <b-form-group>
+    <b-form-input
+      v-model="phone"
+      v-mask="'+7 (###) ###-##-##'"
+      :state="phoneState"
+    />
+    <b-form-invalid-feedback>
+      Заполните поле полностью
+    </b-form-invalid-feedback>
+  </b-form-group>
+</template>
+
+<script>
+import { validateByMaskLength } from '@/utils/maskValidation';
+
+export default {
+  data() {
+    return {
+      phone: ''
+    };
+  },
+  computed: {
+    phoneState() {
+      if (!this.phone) return null;
+      return validateByMaskLength(
+        this.phone, 
+        '+7 (###) ###-##-##'
+      );
+    }
+  }
+};
+</script>
