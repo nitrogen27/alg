@@ -87,7 +87,8 @@ export function validateWithMask(value, mask) {
 
   // Проверка полного соответствия длины
   return valueIndex === value.length;
-}<template>
+}
+<template>
   <b-form-group>
     <b-form-input
       v-model="phone"
