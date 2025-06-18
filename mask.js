@@ -366,3 +366,25 @@ export function validateWithMask(value, mask, ignoreWhitespace = false) {
   // Проверка полного соответствия длины
   return valueIndex === cleanValue.length;
 }
+export function validateByMaskLength(value, mask, ignoreWhitespace = false) {
+  const cleanValue = ignoreWhitespace 
+    ? value.replace(/\s/g, '') 
+    : value;
+    
+  const cleanMask = ignoreWhitespace 
+    ? mask.replace(/\s/g, '') 
+    : mask;
+
+  // Вычисляем длину без необязательных блоков
+  const baseLength = cleanMask
+    .replace(/\[.*?\]/g, '')
+    .replace(/\\[\[\]]/g, '')
+    .replace(/\\(.)/g, '$1')
+    .length;
+
+  // Позволяем длине быть в пределах baseLength ± количество пробелов
+  const minLength = baseLength;
+  const maxLength = baseLength + (value.match(/\s/g)?.length || 0;
+  
+  return cleanValue.length >= minLength && cleanValue.length <= maxLength;
+}
