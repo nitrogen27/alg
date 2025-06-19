@@ -388,3 +388,63 @@ export function validateByMaskLength(value, mask, ignoreWhitespace = false) {
   
   return cleanValue.length >= minLength && cleanValue.length <= maxLength;
 }
+В библиотеке vue-the-mask (https://vuejs-tips.github.io/vue-the-mask/) маска задается с помощью специальных символов, например:
+
+• # — цифра (0-9)
+
+• A — буква (A-Z, a-z)
+
+• N — буква или цифра
+
+• и др.
+
+Чтобы валидировать строку по маске, нужно проверить, что каждый символ значения соответствует правилу символа маски.
+
+В самой библиотеке нет готовой функции валидации отдельно от компонента, но можно написать свою функцию на основе правил маски.
+
+Пример функции валидации значения по маске из vue-the-mask:
+
+function validateByMask(value, mask) {
+  if (!value || !mask) return false;
+  if (value.length !== mask.length) return false;
+
+  // Правила из vue-the-mask
+  const tokens = {
+    '#': /d/,          // цифра
+    'A': /[a-zA-Z]/,    // буква
+    'N': /[a-zA-Z0-9]/, // буква или цифра
+    'X': /./            // любой символ
+  };
+
+  for (let i = 0; i < mask.length; i++) {
+    const maskChar = mask[i];
+    const valueChar = value[i];
+
+    if (tokens[maskChar]) {
+      if (!tokens[maskChar].test(valueChar)) {
+        return false;
+      }
+    } else {
+      // если символ маски не спецсимвол, то он должен совпадать с символом значения
+      if (maskChar !== valueChar) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+
+Пример использования:
+
+console.log(validateByMask('123-ABC', '###-AAA')); // true
+console.log(validateByMask('12A-ABC', '###-AAA')); // false (вместо цифры буква)
+console.log(validateByMask('123-AB1', '###-AAA')); // false (вместо буквы цифра)
+
+
+Если у вас более сложные маски или вы используете другие спецсимволы из библиотеки, можно расширить объект tokens.
+
+---
+
+Если нужно — могу помочь адаптировать под ваш конкретный случай.
