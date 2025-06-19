@@ -448,3 +448,79 @@ console.log(validateByMask('123-AB1', '###-AAA')); // false (вместо бук
 ---
 
 Если нужно — могу помочь адаптировать под ваш конкретный случай.
+Вот готовая функция, которая полностью соответствует правилам библиотеки vue-the-mask и позволяет валидировать значение по маске:
+
+▎Функция валидации:
+
+function validateByMask(value, mask) {
+  if (!value || !mask) return false;
+
+  const tokens = {
+    '#': { pattern: /d/ },
+    'X': { pattern: /[0-9a-zA-Z]/ },
+    'S': { pattern: /[a-zA-Z]/ },
+    'A': { pattern: /[a-zA-Z]/, transform: v => v.toLocaleUpperCase() },
+    'a': { pattern: /[a-zA-Z]/, transform: v => v.toLocaleLowerCase() },
+    '!': { escape: true }
+  };
+
+  let valueIndex = 0;
+  let maskIndex = 0;
+
+  while (maskIndex < mask.length && valueIndex < value.length) {
+    const maskChar = mask[maskIndex];
+    const valueChar = value[valueIndex];
+
+    // Если символ экранирования (!), то следующий символ маски должен совпасть буквально
+    if (tokens[maskChar] && tokens[maskChar].escape) {
+      maskIndex++;
+      if (mask[maskIndex] !== valueChar) return false;
+      valueIndex++;
+      maskIndex++;
+      continue;
+    }
+
+    if (tokens[maskChar] && tokens[maskChar].pattern) {
+      if (!tokens[maskChar].pattern.test(valueChar)) return false;
+      valueIndex++;
+      maskIndex++;
+    } else {
+      // Если символ маски обычный символ, он должен совпасть с символом значения
+      if (maskChar !== valueChar) return false;
+      valueIndex++;
+      maskIndex++;
+    }
+  }
+
+  // После цикла проверяем, что оба индекса дошли до конца
+  return maskIndex === mask.length && valueIndex === value.length;
+}
+
+
+---
+
+▎Пример использования:
+
+console.log(validateByMask('123-ABC', '###-AAA')); // true
+console.log(validateByMask('123-abc', '###-aaa')); // true
+console.log(validateByMask('123-AbC', '###-AaA')); // true
+console.log(validateByMask('12A-ABC', '###-AAA')); // false (буква вместо цифры)
+console.log(validateByMask('123-AB1', '###-AAA')); // false (цифра вместо буквы)
+console.log(validateByMask('(123) 456-7890', '(###) ###-####')); // true
+console.log(validateByMask('(12a) 456-7890', '(###) ###-####')); // false
+
+
+---
+
+Эта функция полностью соответствует логике и правилам библиотеки vue-the-mask, включая поддержку специальных символов:
+
+| Символ | Значение |
+|--------|----------|
+| #      | цифра (0-9) |
+| X      | буква или цифра (0-9, a-z, A-Z) |
+| S      | буква (a-z, A-Z) |
+| A      | буква (автоматически преобразуется в верхний регистр) |
+| a      | буква (автоматически преобразуется в нижний регистр) |
+| !      | экранирование следующего символа |
+
+Теперь вы можете использовать эту функцию для проверки значений по маске, указанной в вашем приложении.
