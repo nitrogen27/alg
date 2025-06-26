@@ -138,3 +138,4 @@ graph TD
 - Снижение нагрузки на релиз-менеджера на 90%  
 
 > "Не автоматизируйте ручные процессы — проектируйте их заново" (Gene Kim, "The Phoenix Project")
+> autocannon --duration 40 --connections 80 --location --request GET "https://mobile2.reso.ru/am/main/v2/userinfo" --header "Content-Type: application/x-www-form-urlencoded" --header "Authorization: Bearer 17b2f8c63912fc886da07abccd01a358fbd14c706806bad6d391b66441eb4a3b6213efaf736752f6af043d7d9f1"
