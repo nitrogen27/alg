@@ -1,0 +1,12 @@
+Promise.sequenceAllSettled = async (promiseFactories) => {
+  const results = [];
+  for (const factory of promiseFactories) {
+    try {
+      const value = await factory();
+      results.push({ status: 'fulfilled', value });
+    } catch (reason) {
+      results.push({ status: 'rejected', reason });
+    }
+  }
+  return results;
+};
