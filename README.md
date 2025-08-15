@@ -3,6 +3,9 @@ https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=799222
 Ваш текущий процесс имеет серьезные недостатки в скорости доставки и качестве релизов. Вот анализ и рекомендации по оптимизации:
 https://auth.openai.com/api/accounts/callback/google?state=77b0f2f4-3b69-4f2a-a782-8e15b6f599b0&code=4%2F0AVMBsJguQmef1twTxwvM-Gw_rd1dXwcAWgI7xplTd5wHM53-GbdfV3u0M0YESP0uef9mdA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&prompt=none
 https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=799222349882-ne3i0s9jdm5s0p7ll2d7tlsi1vc1halt.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fauth.openai.com%2Fapi%2Faccounts%2Fcallback%2Fgoogle&scope=openid+profile+email&state=d58e1d30-7e00-4c3d-afaf-1108eeb29e16&audience=799222349882-ne3i0s9jdm5s0p7ll2d7tlsi1vc1halt.apps.googleusercontent.com&nonce=RhrD2X7l0AApeXxa1rvG
+
+
+https://auth.openai.com/api/accounts/callback/google?state=d58e1d30-7e00-4c3d-afaf-1108eeb29e16&code=4%2F0AVMBsJibj4DMdpo9ad50hhbWjCJPllvo5t6JS_8moaKXJvklXGDoZEe18gX2w_HIw2tCxQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&authuser=0&prompt=none
 ### Критические проблемы текущего подхода:
 1. **Разрыв между master и продом**  
    Код в master ≠ коду в проде → высокий риск конфликтов при экстренных фиксах
