@@ -1,7 +1,7 @@
 https://reso.ru/cabinet/wizard/851/55/0/854/19420/6AF52F885DB4313558FE42F590B1F146/uploader
 https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=799222349882-ne3i0s9jdm5s0p7ll2d7tlsi1vc1halt.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fauth.openai.com%2Fapi%2Faccounts%2Fcallback%2Fgoogle&scope=openid+profile+email&state=77b0f2f4-3b69-4f2a-a782-8e15b6f599b0&audience=799222349882-ne3i0s9jdm5s0p7ll2d7tlsi1vc1halt.apps.googleusercontent.com&nonce=Q3198oHyTJw9Xx1bklFY
 Ваш текущий процесс имеет серьезные недостатки в скорости доставки и качестве релизов. Вот анализ и рекомендации по оптимизации:
-
+https://auth.openai.com/api/accounts/callback/google?state=77b0f2f4-3b69-4f2a-a782-8e15b6f599b0&code=4%2F0AVMBsJguQmef1twTxwvM-Gw_rd1dXwcAWgI7xplTd5wHM53-GbdfV3u0M0YESP0uef9mdA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&prompt=none
 ### Критические проблемы текущего подхода:
 1. **Разрыв между master и продом**  
    Код в master ≠ коду в проде → высокий риск конфликтов при экстренных фиксах
